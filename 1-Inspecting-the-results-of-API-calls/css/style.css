@@ -1,5 +1,12 @@
 .results > div {
-    padding: 1rem;
-    border: 1px solid grey;
-    margin: 1rem;
+  padding: 1rem;
+  border: 1px solid grey;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-result {
+  display: flex;
+  flex-direction: column;
 }

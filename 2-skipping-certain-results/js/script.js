@@ -3,26 +3,21 @@
 // objects in an array. Perhaps they are missing
 // specific properties, or the properties have useless values.
 
-// We can do this using the >> continue << keyword inside a for loop.
-
+// We can do this using the >> continue << keyword inside a 'for' loop.
 
 // >> continue << causes the loop not to execute
 // the code in its current iteration and jumps to the next iteration.
 
-
 // something like the >> break << keyword
-
 
 // continue cannot be used inside a >> forEach << function.
 
 // break - exit the loop entirely.
 // continue - skip a particular iteration of the for loop.
 
-
 // skip parts we don't need from the API
 
 // Example 1:
-
 
 const url = "https://elephant-api.herokuapp.com/elephants";
 const proxy = "https://noroffcors.herokuapp.com/";
@@ -32,22 +27,28 @@ const corsFix = proxy + url;
 const resultsContainer = document.querySelector(".results");
 
 async function makeApiCall() {
-    try {
-        const response = await fetch(corsFix);
+  try {
+    const response = await fetch(corsFix);
 
-        const results = await response.json();
+    const results = await response.json();
 
-        console.log(results);
+    console.log(results);
 
-        //TODO we will make a for loop here to loop on the results
-
-
-    } catch (error) {
-        console.log(error);
-        resultsContainer.innerHTML = message("error", error);
+    //TODO we will make a for loop here to loop on the results
+    for (let i = 0; i < results.length; i++) {
+      if (!results[i].name || !results[i].image) {
+        continue;
+      }
+      console.log(results[i]);
+      resultsContainer.innerHTML += `<div class="card">
+      <h4>${results[i].name}</h4>
+      <img src="${results[i].image}" alt="Picture of ${results[i].name}"/>
+      </div>`;
     }
+  } catch (error) {
+    console.log(error);
+    resultsContainer.innerHTML = message("error", error);
+  }
 }
 
 makeApiCall();
-
-
